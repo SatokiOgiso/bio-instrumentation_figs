@@ -4,14 +4,14 @@ clear all
 close all
 
 dt = 1e-5; %シミュレーションの時間刻み(s)
-signal_length = 0.5; % (s)
+signal_length = 0.2; % (s)
 uchirp_length = 0.05; %ダウンチャープの掃引時間(s)
-dchirp_length = 0.1; % アップチャープの掃引時間(s)
+dchirp_length = 0.08; % アップチャープの掃引時間(s)
 utime = 0:dt:uchirp_length; %
 dtime = 0:dt:dchirp_length;
 f0 = 1e1; %掃引周波数　(Hz)
-f1 = 100e1; %掃引周波数　(Hz)
-tstart = 0.1; % チャープ波送信開始時刻 (s)
+f1 = 500e1; %掃引周波数　(Hz)
+tstart = 0.025; % チャープ波送信開始時刻 (s)
 
 uchirp = chirp(utime, f0, uchirp_length, f1); %送信波1波を生成
 dchirp = chirp(dtime, f1, dchirp_length, f0); %送信波1波を生成
@@ -21,7 +21,7 @@ dchirp2 = [dchirp, dchirp];%ドップラー効果計測のため2波にする
 
 signal_m = zeros(1,ceil(signal_length/dt));
 signal_b = zeros(1,ceil(signal_length/dt));
-stime = (0:floor(signal_length/dt))*dt;
+stime = (1:ceil(signal_length/dt))*dt;
 
 tstart_index = floor(tstart/dt); %送信開始時刻のインデックス
 signal_m(tstart_index:tstart_index + length(uchirp2)-1) = uchirp2;
