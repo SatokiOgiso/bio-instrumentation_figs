@@ -27,6 +27,8 @@ tstart_index = floor(tstart/dt); %送信開始時刻のインデックス
 signal_m(tstart_index:tstart_index + length(uchirp2)-1) = uchirp2;
 signal_b(tstart_index:tstart_index + length(dchirp2)-1) = dchirp2;
 
+signal_received = signal_b + signal_m; % 簡単のため受信信号はこれらの和と仮定
+
 figure()
 subplot(511)
 plot(stime,signal_m, 'r');
@@ -35,14 +37,14 @@ subplot(512)
 plot(stime,signal_b);
 ylabel( {'transmitted', 'B-mode signal'}, 'FontName','Times','FontSize',16 );
 subplot(513)
-plot(stime,signal_b + signal_m);
+plot(stime,signal_received );
 ylabel( {'simulated', ' received signal'}, 'FontName','Times','FontSize',16 ); 
 subplot(514)
-compressed_m = xcorr(signal_m+signal_b, uchirp);
+compressed_m = xcorr(signal_received , uchirp);
 plot(stime,compressed_m(length(signal_m):length(compressed_m)), 'r')%パルス圧縮結果の表示
 ylabel( {'Compressed', ' M-mode signal'}, 'FontName','Times','FontSize',16 ); 
 subplot(515)
-compressed_b = xcorr(signal_m+signal_b, dchirp);
+compressed_b = xcorr(signal_received , dchirp);
 plot(stime,compressed_b(length(signal_b):length(compressed_b)))%パルス圧縮結果の表示
 xlabel( 'Time', 'FontName','Times','FontSize',16 ); 
 ylabel( {'Compressed', ' B-mode signal'}, 'FontName','Times','FontSize',16 ); 
