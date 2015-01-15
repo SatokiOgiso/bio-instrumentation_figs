@@ -5,8 +5,8 @@ close all
 
 dt = 1e-5; %シミュレーションの時間刻み(s)
 signal_length = 0.5; % (s)
-uchirp_length = 0.1; % アップチャープの掃引時間(s)
-dchirp_length = 0.05; %ダウンチャープの掃引時間(s)
+uchirp_length = 0.05; %ダウンチャープの掃引時間(s)
+dchirp_length = 0.1; % アップチャープの掃引時間(s)
 utime = 0:dt:uchirp_length; %
 dtime = 0:dt:dchirp_length;
 f0 = 1e1; %掃引周波数　(Hz)
