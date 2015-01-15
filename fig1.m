@@ -1,5 +1,8 @@
 %生体計測レポートFig.1生成用プログラム
 
+clear all
+close all
+
 dt = 1e-5; %シミュレーションの時間刻み(s)
 signal_length = 0.5; % (s)
 uchirp_length = 0.1; % アップチャープの掃引時間(s)
